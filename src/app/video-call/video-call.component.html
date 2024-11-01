@@ -1,0 +1,42 @@
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+    <h2 style="color: #333;">Video Call</h2>
+  
+    <!-- Local video container with label -->
+    <div style="position: relative; max-width: 320px; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      <label style="position: absolute; top: 8px; left: 8px; color: #fff; background-color: rgba(0, 0, 0, 0.7); padding: 4px 12px; border-radius: 4px; font-size: 14px;">
+        Local Video
+      </label>
+      <video id="localVideo" autoplay playsinline muted style="width: 100%; height: auto;"></video>
+    </div>
+  
+    <!-- Remote video container with conditional label -->
+    <div style="position: relative; max-width: 320px; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      <!-- Only show label when remote stream is available -->
+      <label *ngIf="callInProgress" style="position: absolute; top: 8px; left: 8px; color: #fff; background-color: rgba(0, 0, 0, 0.7); padding: 4px 12px; border-radius: 4px; font-size: 14px;">
+        Remote Video
+      </label>
+      <video id="remoteVideo" autoplay playsinline style="width: 100%; height: auto;"></video>
+    </div>
+  
+    <!-- Control buttons -->
+    <div style="display: flex; gap: 10px;">
+      <!-- Start/Stop Call button -->
+      <button *ngIf="!callInProgress && !incomingCall" (click)="startCall()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s;">
+        Start Call
+      </button>
+      <button *ngIf="callInProgress" (click)="stopCall()" style="padding: 10px 20px; background-color: #FF5252; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s;">
+        Stop Call
+      </button>
+  
+      <!-- Incoming call control buttons -->
+      <div *ngIf="incomingCall" style="display: flex; gap: 10px;">
+        <button (click)="acceptCall()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s;">
+          Accept
+        </button>
+        <button (click)="rejectCall()" style="padding: 10px 20px; background-color: #FF5252; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s;">
+          Reject
+        </button>
+      </div>
+    </div>
+  </div>
+  
